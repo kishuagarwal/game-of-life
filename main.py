@@ -1,6 +1,10 @@
+from time import sleep
 from random import randint
 import colorama
 from colorama import ansi, Style
+
+
+from utils import load_sample
 
 ALIVE_SYMBOL = Style.BRIGHT + '#'
 DEAD_SYMBOL = ' '
@@ -64,7 +68,9 @@ def get_next_state(current_state):
 if __name__ == "__main__":
     colorama.init()
 
+    # initial_state = load_sample('toad.txt')
     initial_state = get_random_state(150, 40)
+
     current_state = initial_state
 
     # Clear the screen before printing anything
@@ -74,5 +80,6 @@ if __name__ == "__main__":
             print(ansi.Cursor.POS(1, 1))
             print_board_state(current_state)
             current_state = get_next_state(current_state)
+            sleep(0.05)
     except KeyboardInterrupt as e:
         print(ansi.clear_screen())
